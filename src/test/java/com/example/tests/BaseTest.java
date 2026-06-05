@@ -16,6 +16,7 @@ public class BaseTest {
     protected static RequestSpecification baseSpec;
     protected static RequestSpecification baseAdminSpec;
     protected  static String profileToken;
+    protected static RequestSpecification basePatientSpec;
 
     @BeforeAll
     static void setUp() {
@@ -52,7 +53,13 @@ public class BaseTest {
         // Спека для админки (порт 8081)
         baseAdminSpec = new RequestSpecBuilder()
                 .setBaseUri("http://sportmed.oblteh:8081")
-                .addHeader("Authorization", "Bearer " + token)
+                .addHeader("Authorization", "Bearer " + profileToken)
+                .setContentType(ContentType.JSON)
+                .build();
+
+        basePatientSpec = new RequestSpecBuilder()
+                .setBaseUri("http://sportmed.oblteh:8086")
+                .addHeader("Authorization", "Bearer " + profileToken)
                 .setContentType(ContentType.JSON)
                 .build();
 
